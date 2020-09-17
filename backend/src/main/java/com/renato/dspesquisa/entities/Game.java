@@ -13,6 +13,7 @@ import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.renato.dspesquisa.entities.enums.Platform;
 
 @Entity
@@ -26,10 +27,12 @@ public class Game implements Serializable {
 	private String title;
 	private Platform platform;
 	
+	@JsonIgnore
 	@ManyToOne
 	@JoinColumn(name = "genre_id")
 	private Genre genre;
 	
+	@JsonIgnore
 	@OneToMany(mappedBy = "game")
 	private List<Record> records = new ArrayList<>();
 	
@@ -52,11 +55,11 @@ public class Game implements Serializable {
 		this.id = id;
 	}
 
-	public String getName() {
+	public String getTitle() {
 		return title;
 	}
 
-	public void setName(String name) {
+	public void setTitle(String name) {
 		this.title = name;
 	}
 
